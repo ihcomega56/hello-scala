@@ -3,6 +3,7 @@ package app.repo
 import app.models.{Bug, Issue, TicketStatus}
 import org.scalatest.{FlatSpec, Matchers}
 
+// TODO テスト同士依存しすぎ問題を解決する
 class TicketRepoSpec extends FlatSpec with Matchers {
 
   val issue1 = new Issue(1, "タイトル1")
