@@ -4,9 +4,6 @@ import app.models.{Bug, Issue, Ticket, TicketStatus}
 
 object TicketRepo {
 
-  // このクラスでしか見えない
-//  type TicketId = Long
-
   private var tickets: Map[TicketId, Ticket] = Map()
 
   private var currentId: TicketId = 1
