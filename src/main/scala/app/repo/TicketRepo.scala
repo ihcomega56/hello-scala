@@ -47,7 +47,19 @@ object TicketRepo {
     if (bugs.nonEmpty) Some(bugs) else None
   }
 
-  // TODO 実装する
-  def fix(id: TicketId): Boolean = { false }
+  def fix(id: TicketId): Boolean = {
+    findById(id) match {
+      case Some(t: Issue) =>
+        if (t.status == TicketStatus.Open)
+          tickets = tickets.updated(id, new Issue(t.id, t.title, TicketStatus.Fixed))
+        else return false
+      case Some(t: Bug) =>
+        if (t.status == TicketStatus.Open)
+          tickets = tickets.updated(id, new Bug(t.id, t.title, t.description, TicketStatus.Fixed))
+        else return false
+      case _ => return false
+    }
+    true
+  }
 
 }

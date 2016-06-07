@@ -49,6 +49,12 @@ class TicketRepoSpec extends FlatSpec with Matchers {
     TicketRepo.findBugsByStatus("fixed") should be === Some(Seq(bug2))
   }
 
-  "fix" should "finds bugs by ticket status" in {
+  "fix" should "changes the status from open to fixed" in {
+    TicketRepo.fix(1) should be === true
+    TicketRepo.fix(2) should be === true
+    TicketRepo.findById(1).get.status should be === TicketStatus.Fixed
+    TicketRepo.findById(2).get.status should be === TicketStatus.Fixed
+    TicketRepo.fix(3) should be === false
+    TicketRepo.fix(4) should be === false
   }
 }
