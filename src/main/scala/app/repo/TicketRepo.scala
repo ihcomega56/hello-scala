@@ -33,18 +33,18 @@ object TicketRepo {
     newBug
   }
 
-  // TODO 戻り値をオプションにする
-  def findIssuesByStatus(status: String): Seq[Issue] = {
-    tickets.collect {
+  def findIssuesByStatus(status: String): Option[Seq[Issue]] = {
+    val issues = tickets.collect {
       case (id, ticket: Issue) if TicketStatus.isMatchedStatus(status, ticket) => ticket
     }.toSeq
+    if (issues.nonEmpty) Some(issues) else None
   }
 
-  // TODO 戻り値をオプションにする
-  def findBugByStatus(status: String): Seq[Bug] = {
-    tickets.collect {
+  def findBugsByStatus(status: String): Option[Seq[Bug]] = {
+    val bugs = tickets.collect {
       case (id, ticket: Bug) if TicketStatus.isMatchedStatus(status, ticket) => ticket
     }.toSeq
+    if (bugs.nonEmpty) Some(bugs) else None
   }
 
   // TODO 実装する
